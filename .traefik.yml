@@ -1,0 +1,24 @@
+displayName: Idempotency Key Middleware
+type: middleware
+import: github.com/useswype/traefik-idempotency-plugin
+summary: |
+  Implements RFC draft-ietf-httpapi-idempotency-key-header for idempotent HTTP requests.
+  Uses Redis to store request fingerprints and cached responses, preventing duplicate
+  processing of requests with the same idempotency key.
+compatibility: Traefik >= v2.5.5
+testData:
+  redisAddress: "localhost:6379"
+  redisPassword: ""
+  redisDB: 0
+  keyHeader: "Idempotency-Key"
+  ttlSeconds: 86400
+  requireKey: false
+  methods:
+    - POST
+    - PATCH
+  keyPrefix: "idempotency:"
+  connectionTimeout: 5000
+  poolSize: 10
+  maxBodySize: 1048576
+  lockTimeout: 60
+  failOpen: true
